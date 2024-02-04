@@ -14,7 +14,6 @@ After Egg is created, run following command to install dependencies:
 pip3 install -r pump_controller.egg-info/requires.txt
 ```
 
-
 # **To use:**
 
 ### ArduinoBot
@@ -26,6 +25,11 @@ from pump_controller import visualize_rgb
 
 # Initialize arduinobot
 arduinobot = PumpController(get_serial_port())
+
+# Prime pumps and hoses
+for pump in ['R', 'G', 'B', 'Y', 'W']:
+    arduinobot.purge_pump(pump, 3) # Run the red pump for 3 seconds
+    arduinobot.drain(5) # Drain the test cell for 5 seconds
 
 # Mix a target color and store
 arduinobot.change_target([0.1, 0.2, 0.3, 0.4])
