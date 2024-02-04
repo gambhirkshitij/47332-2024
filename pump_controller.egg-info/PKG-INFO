@@ -1,0 +1,6 @@
+Metadata-Version: 2.1
+Name: pump-controller
+Version: 1.0
+Author: K. Gambhir, L. Nyeland, R. Ziskason - DTU Energy
+License: MPL-2.0
+Requires-Python: >=3.10.9
