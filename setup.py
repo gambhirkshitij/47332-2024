@@ -15,6 +15,7 @@ setup(
         'matplotlib',
         'datetime',
         'botorch',
-        'scipy'
+        'scipy',
+        'torch'
     ]
 )

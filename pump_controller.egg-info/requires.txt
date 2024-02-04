@@ -1,7 +1,0 @@
-pyserial
-numpy
-pandas
-matplotlib
-datetime
-botorch
-scipy

@@ -58,6 +58,10 @@ class SilicoPumpController:
                                   [255, 255, 0]]
                                   )
         
+        col_list = np.array(col_list)
+        col_list[col_list < 0] = 0
+        col_list = np.divide(col_list, np.sum(col_list))
+        
         mixed_color = np.dot(col_list, true_coefficients)
         noise = np.random.normal(0, self.noise_std, mixed_color.shape)
         mixed_color_with_noise = np.clip(mixed_color + noise, 0, 255)
