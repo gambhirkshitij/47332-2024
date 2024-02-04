@@ -14,7 +14,7 @@ setup(
         'pandas',
         'matplotlib',
         'datetime',
-        'torch',
+        'botorch',
         'scipy'
     ]
 )
