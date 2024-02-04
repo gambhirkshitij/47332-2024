@@ -16,6 +16,7 @@ setup(
         'datetime',
         'botorch',
         'scipy',
-        'torch'
+        'torch',
+        'IPython'
     ]
 )

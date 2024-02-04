@@ -1,5 +1,11 @@
 # **To install:**
 
+Clone repository:
+
+```bash
+git clone https://gambhirkshitij/47332-2024
+```
+
 Navigate into `47332-2024` folder and run command:
 
 ```bash
@@ -28,7 +34,7 @@ arduinobot = PumpController(get_serial_port())
 
 # Prime pumps and hoses
 for pump in ['R', 'G', 'B', 'Y', 'W']:
-    arduinobot.purge_pump(pump, 3) # Run the red pump for 3 seconds
+    arduinobot.purge_pump('R', 3) # Run the red pump for 3 seconds
     arduinobot.drain(5) # Drain the test cell for 5 seconds
 
 # Mix a target color and store
