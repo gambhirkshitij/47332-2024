@@ -73,3 +73,7 @@ rgb_measurement = silicobot.mix_color(new_mixture)
 # Visualize new color against target color
 visualize_rgb(mixture = new_mixture, rgb = rgb_measurement, pump_controller=silicobot)
 ```
+
+# API Reference
+
+[Find the API Reference here](https://www.student.dtu.dk/~s193903/47332/#PumpControllerhttps://)
