@@ -58,7 +58,7 @@ from pump_controller import SilicoPumpController
 from pump_controller import visualize_rgb
 
 # Initialize silicobot
-silicobot = PumpController(get_serial_port())
+silicobot = SilicoPumpController(noise_std = 1)
 
 # Mix a target color and store
 silicobot.change_target([0.1, 0.2, 0.3, 0.4])
