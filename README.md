@@ -3,7 +3,7 @@
 Clone repository:
 
 ```bash
-git clone https://gambhirkshitij/47332-2024
+git clone https://github.com/gambhirkshitij/47332-2024
 ```
 
 Navigate into `47332-2024` folder and run command:
