@@ -20,6 +20,8 @@ After Egg is created, run following command to install dependencies:
 pip3 install -r pump_controller.egg-info/requires.txt
 ```
 
+Finally, copy the `config.json` file into the folder that you are working in or create your own `config.json`. Now you are ready to use the Pump Controller library!
+
 # **To use:**
 
 ### ArduinoBot
