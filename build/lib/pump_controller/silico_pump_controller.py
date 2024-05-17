@@ -29,7 +29,6 @@ class SilicoPumpController:
             os.makedirs('silicologs')
 
         # Create a log file with the current date and time
-        # TODO Log to csv files instead of txt files
         now = datetime.datetime.now()
         log_filename = f"silicologs/silicolog_{now.strftime('%d%m%Y_%H%M%S')}.txt"
         self.log_file = log_filename
