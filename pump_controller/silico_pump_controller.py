@@ -1,6 +1,8 @@
 import numpy as np
 import os
 import datetime
+import pandas as pd
+from .utils import read_logfile, write_to_logfile
 
 class SilicoPumpController:
     def __init__(self, noise_std):
@@ -28,13 +30,12 @@ class SilicoPumpController:
         if not os.path.exists('silicologs'):
             os.makedirs('silicologs')
 
-        # Create a log file with the current date and time
-        # TODO Log to csv files instead of txt files
+        # Create a log file with the current date and time and write column names
         now = datetime.datetime.now()
-        log_filename = f"silicologs/silicolog_{now.strftime('%d%m%Y_%H%M%S')}.txt"
-        self.log_file = log_filename
-        with open(self.log_file, "a") as f:
-            f.write("mixture,measurement,target_mixture,target_measurement\n")
+        self.log_file = f"silicologs/silicolog_{now.strftime('%d%m%Y_%H%M%S')}.csv"
+        log_df = pd.DataFrame(columns=['mixture', 'measurement', 'target_mixture', 'target_measurement'])
+        log_df.to_csv(self.log_file, index=False)
+
 
     def mix_color(self, col_list, changing_target = False):
 
@@ -69,9 +70,7 @@ class SilicoPumpController:
 
         if not changing_target:
             # Append color mixture and measurement data to the log file
-            with open(self.log_file, "a") as f:
-                log_data = f"{col_list}, {mixed_color_with_noise}, {self.target_mixture}, {self.target_color}\n" 
-                f.write(log_data)
+            write_to_logfile(col_list, mixed_color_with_noise, self.target_mixture, self.target_color, self.log_file)
 
         return mixed_color_with_noise
 

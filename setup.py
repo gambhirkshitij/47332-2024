@@ -7,7 +7,7 @@ setup(
     description = '',
     license = 'MPL-2.0',
     packages = find_packages(),
-    python_requires = '>=3.10.9',
+    python_requires = '>=3.9.6',
     install_requires = [
         'pyserial',
         'numpy',
