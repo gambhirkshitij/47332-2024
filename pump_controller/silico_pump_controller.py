@@ -60,7 +60,8 @@ class SilicoPumpController:
                                   [255, 255, 0]]
                                   )
         
-        col_list = np.array(col_list)
+
+        col_list = np.array(col_list).reshape(4,) # Make sure that input list has np shape (4,)
         col_list[col_list < 0] = 0
         col_list = np.divide(col_list, np.sum(col_list))
         

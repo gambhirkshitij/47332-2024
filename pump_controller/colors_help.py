@@ -98,17 +98,17 @@ def visualize_rgb(mixture, rgb, pump_controller, target = 'pump_controller', sco
 
 
 
-def visualize_candidates(data_list):
+def visualize_candidates(data_df):
 
     """
     Visualizes candidate mixture data using pie charts for mixtures, measured colors, and target colors.
 
     Parameters:
-    - data_list (list): A list containing four elements:
-        - Element 0: List of mixtures for each candidate.
-        - Element 1: List of measurement values for each candidate.
-        - Element 2: List of target color values for each candidate.
-        - Element 3: List of scores for each candidate.
+    - data_df (pd.DataFrame): A pandas DataFrame containing four columns:
+        - Column 0: List of mixtures.
+        - Column 1: List of measurement.
+        - Column 2: List of target measurements.
+        - Column 3: List of scores.
 
     Returns:
     - None
@@ -152,12 +152,17 @@ def visualize_candidates(data_list):
 
         return ax
 
+    # Reformat the dataframe to make all lists numpy (hacky, but works)
+    data_df = data_df[['mixture', 'measurement', 'target_measurement', 'score']]
 
-    data_df = pd.DataFrame({'mixtures': list(data_list[0]),
-                        'measurements': list(data_list[1]),
-                        'targets': list(data_list[2]),
-                        'scores': data_list[3].reshape(len(data_list[2]))})
-    
+    data_list = data_df.T.values.tolist()
+    data_list = [np.array(col) for col in data_list]
+
+    data_df = pd.DataFrame({'mixture': list(data_list[0]),
+                            'measurement': list(data_list[1]),
+                            'target': list(data_list[2]),
+                            'score': data_list[3].reshape(len(data_list[2]))})
+
     target_size = 500
     mixture_size = 3000
     measured_size = 2000
@@ -165,12 +170,12 @@ def visualize_candidates(data_list):
     fig, ax = plt.subplots(figsize = (14,10))
 
     for i in range(len(data_df)):
-        draw_pie(data_df.mixtures[i], i+1, data_df.scores[i], mixture_size, fill_color = None, ax = ax) # Mixture
-        draw_pie([1.0], i+1, data_df.scores[i], measured_size, fill_color=list(data_df.measurements[i]/255), ax = ax) # Measured color
-        draw_pie([1.0], i+1, data_df.scores[i], target_size, fill_color=list(data_df.targets[i]/255), ax = ax) # Target color
+        draw_pie(data_df.mixture[i], i+1, data_df.score[i], mixture_size, fill_color = None, ax = ax) # Mixture
+        draw_pie([1.0], i+1, data_df.score[i], measured_size, fill_color=list(data_df.measurement[i]/255), ax = ax) # Measured color
+        draw_pie([1.0], i+1, data_df.score[i], target_size, fill_color=list(data_df.target[i]/255), ax = ax) # Target color
 
     plt.xlim(0, len(data_df)+1)
-    plt.ylim(data_df.scores.min() - 8, data_df.scores.max() + 8)
+    plt.ylim(data_df.score.min() - 8, data_df.score.max() + 8)
 
     plt.xlabel('Test #')
     plt.ylabel('Score')

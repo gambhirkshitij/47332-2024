@@ -25,6 +25,14 @@ def write_to_logfile(mixture, measurement, target_mixture, target_measurement, l
     }
     append_df = pd.DataFrame(new_row, index = [0])
 
+    # Convert the string representation of lists into actual lists
+    for column in append_df.columns:
+        append_df[column] = append_df[column].apply(ast.literal_eval)
+
+    # Convert the lists of strings into lists of floats
+    for column in append_df.columns:
+        append_df[column] = append_df[column].apply(lambda x: [float(i) for i in x])
+
     if len(log_df) == 0:
         log_df = append_df
     else:
