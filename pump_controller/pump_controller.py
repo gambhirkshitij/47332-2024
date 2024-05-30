@@ -38,8 +38,8 @@ class PumpController:
         self.cell_volume = cell_volume
         self.drain_time = drain_time
 
-        self.target_mixture = None
-        self.target_color = None
+        self.target_mixture = [0.25, 0.25, 0.25, 0.25]
+        self.target_color = [255, 255, 255]
 
         # Create "logs" folder if it doesn't exist
         if not os.path.exists('logs'):
@@ -415,6 +415,11 @@ class PumpController:
         - Logs the mixture and measurement, along with the target mixture and color.
         - Returns the RGB values obtained after the color mixing process.
         """
+
+        # If all coefficients are zero, set them to a small value to avoid division by zero
+        if col_list == [0, 0, 0, 0]:
+            min = 1e-5
+            col_list = [min, min, min, min]
 
         # Normalization
         col_list = np.array(col_list).reshape(4,) # Make sure that input list has np shape (4,)

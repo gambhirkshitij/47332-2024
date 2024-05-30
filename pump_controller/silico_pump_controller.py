@@ -23,8 +23,8 @@ class SilicoPumpController:
 
         self.noise_std = noise_std
 
-        self.target_mixture = None
-        self.target_color = None 
+        self.target_mixture = [0.25, 0.25, 0.25, 0.25]
+        self.target_color = [255, 255, 255] 
 
         # Create "logs" folder if it doesn't exist
         if not os.path.exists('silicologs'):
@@ -60,7 +60,12 @@ class SilicoPumpController:
                                   [255, 255, 0]]
                                   )
         
+        # If all coefficients are zero, set them to a small value to avoid division by zero
+        if col_list == [0, 0, 0, 0]:
+            min = 1e-5
+            col_list = [min, min, min, min]
 
+        # Normalization
         col_list = np.array(col_list).reshape(4,) # Make sure that input list has np shape (4,)
         col_list[col_list < 0] = 0
         col_list = np.divide(col_list, np.sum(col_list))
