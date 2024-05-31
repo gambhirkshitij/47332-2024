@@ -11,7 +11,7 @@ Navigate into `47332-2024` folder and run command:
 ```bash
 cd 47332-2024
 
-python3 setup.py install
+pip install .
 ```
 
 <!-- After Egg is created, run following command to install dependencies:
